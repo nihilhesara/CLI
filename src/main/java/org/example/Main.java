@@ -1,7 +1,11 @@
 package org.example;
 
-import org.json.JSONObject;
+import com.google.gson.Gson;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,14 +23,23 @@ public class Main {
         System.out.print("Enter maximum ticket capacity: ");
         double maxTicketCapacity = input.nextDouble();
 
-        // Create a JSON object and populate it with the entered data
-        JSONObject json = new JSONObject();
-        json.put("total_number_of_tickets", noOfTickets);
-        json.put("release_rate", releaseRate);
-        json.put("customer_rate", customerRate);
-        json.put("maximum_ticket_capacity", maxTicketCapacity);
+        // Create a data class to hold the input values
+        TicketInfo ticketInfo = new TicketInfo(noOfTickets, releaseRate, customerRate, maxTicketCapacity);
 
-        // Print the JSON object
-        System.out.println(json.toString(4)); // 4 is the number of spaces for indentation
+        // Convert the TicketInfo object to JSON
+        Gson gson = new Gson();
+        String json = gson.toJson(ticketInfo);
+
+        // Print the JSON object to console
+        System.out.println(json);
+
+        // Write the JSON object to a file
+        try {
+            Files.write(Paths.get("info.json"), json.getBytes(), StandardOpenOption.CREATE);
+            System.out.println("JSON data written to info.json file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the file.");
+            e.printStackTrace();
+        }
     }
 }
