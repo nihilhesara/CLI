@@ -1,0 +1,1 @@
+Config{totalNumberOfTickets=10, releaseRate=20.0, customerRate=30.0, maximumTicketCapacity=40.0}
