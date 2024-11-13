@@ -1,1 +1,1 @@
-Config{totalNumberOfTickets=10, releaseRate=20.0, customerRate=30.0, maximumTicketCapacity=40.0}
+Config{totalNumberOfTickets=20, releaseRate=40.0, customerRate=60.0, maximumTicketCapacity=80.0}

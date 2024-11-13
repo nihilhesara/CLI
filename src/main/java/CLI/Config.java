@@ -2,6 +2,8 @@ package CLI;
 
 //import com.google.gson.Gson;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -96,7 +98,7 @@ public class Config implements Serializable {
     }
 
     // Load configuration from a serialized file
-    public static Config loadConfigFromSerialized(String filePath) {
+    public static @Nullable Config loadConfigFromSerialized(String filePath) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
             Config config = (Config) ois.readObject();
             System.out.println("Configuration loaded from " + filePath);
