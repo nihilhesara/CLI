@@ -5,6 +5,7 @@ package CLI;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Config implements Serializable {
@@ -66,7 +67,7 @@ public class Config implements Serializable {
                 '}';
     }
 
-    /* Save configuration to a JSON file
+    /*Save configuration to a JSON file
     public void saveConfigToJson(String filePath) {
         try (Writer writer = new FileWriter(filePath)) {
             Gson gson = new Gson();
@@ -107,5 +108,21 @@ public class Config implements Serializable {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static int getValidInput(Scanner input, String prompt) {
+        int value = 0;
+        boolean valid = false;
+        while (!valid) {
+            try {
+                System.out.print(prompt);
+                value = input.nextInt();
+                valid = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a numeric value.");
+                input.next(); // Clear the invalid input
+            }
+        }
+        return value;
     }
 }

@@ -2,27 +2,19 @@ package CLI;
 
 import java.util.Scanner;
 
+import static CLI.Config.getValidInput;
+
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Enter total number of tickets: ");
-        int totalTickets = input.nextInt();
+        int totalTickets = getValidInput(input, "Enter total number of tickets: ");
+        int numberOfVendors = getValidInput(input, "Enter number of vendors: ");
+        int ticketsPerVendor = getValidInput(input, "Enter tickets each vendor will release: ");
+        int releaseRate = getValidInput(input, "Enter ticket release rate: ");
+        int numberOfCustomers = getValidInput(input, "Enter number of customers: ");
+        int ticketsPerCustomer = getValidInput(input, "Enter tickets each customer will purchase: ");
 
-        System.out.print("Enter number of vendors: ");
-        int numberOfVendors = input.nextInt();
-
-        System.out.print("Enter tickets each vendor will release: ");
-        int ticketsPerVendor = input.nextInt();
-
-        System.out.print("Enter ticket release rate: ");
-        int releaseRate = input.nextInt();
-
-        System.out.print("Enter number of customers: ");
-        int numberOfCustomers = input.nextInt();
-
-        System.out.print("Enter tickets each customer will purchase: ");
-        int ticketsPerCustomer = input.nextInt();
 
         TicketPool ticketPool = new TicketPool(totalTickets);
 
