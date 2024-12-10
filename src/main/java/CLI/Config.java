@@ -1,7 +1,6 @@
 package CLI;
 
-//import com.google.gson.Gson;
-
+import com.google.gson.Gson;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -13,15 +12,23 @@ public class Config implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private int totalNumberOfTickets;
-    private double releaseRate;
-    private double customerRate;
-    private double maximumTicketCapacity;
+    private int releaseRate;
+    private int customerRate;
+    private int maximumTicketCapacity;
+    private int numberOfVendors;
+    private int numberOfCustomers;
+    private int ticketsPerVendor;
+    private int ticketsPerCustomer;
 
-    public Config(int totalNumberOfTickets, double releaseRate, double customerRate, double maximumTicketCapacity) {
+    public Config(int totalNumberOfTickets, int releaseRate, int customerRate, int maximumTicketCapacity, int numberOfVendors, int numberOfCustomers, int ticketsPerVendor, int ticketsPerCustomer) {
         this.totalNumberOfTickets = totalNumberOfTickets;
         this.releaseRate = releaseRate;
         this.customerRate = customerRate;
         this.maximumTicketCapacity = maximumTicketCapacity;
+        this.numberOfVendors = numberOfVendors;
+        this.numberOfCustomers = numberOfCustomers;
+        this.ticketsPerVendor = ticketsPerVendor;
+        this.ticketsPerCustomer = ticketsPerCustomer;
     }
 
     // Getters and setters
@@ -33,28 +40,60 @@ public class Config implements Serializable {
         this.totalNumberOfTickets = totalNumberOfTickets;
     }
 
-    public double getReleaseRate() {
+    public int getReleaseRate() {
         return releaseRate;
     }
 
-    public void setReleaseRate(double releaseRate) {
+    public void setReleaseRate(int releaseRate) {
         this.releaseRate = releaseRate;
     }
 
-    public double getCustomerRate() {
+    public int getCustomerRate() {
         return customerRate;
     }
 
-    public void setCustomerRate(double customerRate) {
+    public void setCustomerRate(int customerRate) {
         this.customerRate = customerRate;
     }
 
-    public double getMaximumTicketCapacity() {
+    public int getMaximumTicketCapacity() {
         return maximumTicketCapacity;
     }
 
-    public void setMaximumTicketCapacity(double maximumTicketCapacity) {
+    public void setMaximumTicketCapacity(int maximumTicketCapacity) {
         this.maximumTicketCapacity = maximumTicketCapacity;
+    }
+
+    public int getNumberOfVendors() {
+        return numberOfVendors;
+    }
+
+    public void setNumberOfVendors(int numberOfVendors) {
+        this.numberOfVendors = numberOfVendors;
+    }
+
+    public int getNumberOfCustomers() {
+        return numberOfCustomers;
+    }
+
+    public void setNumberOfCustomers(int numberOfCustomers) {
+        this.numberOfCustomers = numberOfCustomers;
+    }
+
+    public int getTicketsPerVendor() {
+        return ticketsPerVendor;
+    }
+
+    public void setTicketsPerVendor(int ticketsPerVendor) {
+        this.ticketsPerVendor = ticketsPerVendor;
+    }
+
+    public int getTicketsPerCustomer() {
+        return ticketsPerCustomer;
+    }
+
+    public void setTicketsPerCustomer(int ticketsPerCustomer) {
+        this.ticketsPerCustomer = ticketsPerCustomer;
     }
 
     @Override
@@ -64,10 +103,14 @@ public class Config implements Serializable {
                 ", releaseRate=" + releaseRate +
                 ", customerRate=" + customerRate +
                 ", maximumTicketCapacity=" + maximumTicketCapacity +
+                ", numberOfVendors=" + numberOfVendors +
+                ", numberOfCustomers=" + numberOfCustomers +
+                ", ticketsPerVendor=" + ticketsPerVendor +
+                ", ticketsPerCustomer=" + ticketsPerCustomer +
                 '}';
     }
 
-    /*Save configuration to a JSON file
+    // Save configuration to a JSON file
     public void saveConfigToJson(String filePath) {
         try (Writer writer = new FileWriter(filePath)) {
             Gson gson = new Gson();
@@ -76,7 +119,7 @@ public class Config implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     // Save configuration to a plain text file
     public void saveConfigToText(String filePath) {
