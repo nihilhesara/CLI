@@ -19,7 +19,7 @@ This project simulates a ticket booking system with multiple vendors and custome
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/ticket-booking-system.git
+    git clone https://github.com/nihilhesara/CLI.git
     ```
 2. Navigate to the project directory:
     ```sh
