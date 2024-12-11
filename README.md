@@ -1,51 +1,64 @@
-# Ticket Management CLI
+# Ticket Booking System
 
-This project simulates a multi-threaded environment for ticket management where multiple vendors release tickets and multiple customers purchase tickets concurrently.
+This project simulates a ticket booking system with multiple vendors and customers. Vendors release tickets at a specified rate, and customers purchase tickets until there are no tickets left.
 
 ## Features
 
-- **Ticket Pool**: Manages a pool of tickets with thread-safe methods for adding and removing tickets.
-- **Vendors**: Simulate vendors releasing tickets to the pool concurrently.
-- **Customers**: Simulate customers purchasing tickets from the pool concurrently.
-- **Thread-Safe**: Ensures safe concurrent access to the ticket pool using locks.
+- Multiple vendors can release tickets concurrently.
+- Multiple customers can purchase tickets concurrently.
+- The system ensures that all vendors finish releasing tickets before customers start purchasing.
+- The program saves the configuration details in JSON, text, and serialized formats.
+- The program displays the number of tickets sold by each vendor and the number of tickets bought by each customer.
 
-## Classes
+## Prerequisites
 
-### TicketPool
+- Java 21 or later
+- Maven
 
-- Manages the pool of tickets.
-- Uses `ReentrantLock` for thread-safe operations.
-- Methods:
-  - `addTickets(int tickets)`: Adds the specified number of tickets to the pool.
-  - `removeTicket()`: Removes a ticket from the pool if available.
-  - `getAvailableTickets()`: Returns the number of available tickets.
+## Installation
 
-### Vendor
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/nihilhesara/CLI.git
+    ```
+2. Navigate to the project directory:
+    ```sh
+    cd ticket-booking-system
+    ```
+3. Build the project using Maven:
+    ```sh
+    mvn clean install
+    ```
 
-- Implements `Runnable` interface.
-- Releases tickets to the pool at a specified rate.
-- Constructor parameters:
-  - `TicketPool ticketPool`: The shared ticket pool.
-  - `int ticketsToRelease`: Number of tickets to release.
-  - `int releaseRate`: Rate at which tickets are released.
+## Usage
 
-### Customer
+1. Run the main program:
+    ```sh
+    mvn exec:java -Dexec.mainClass="CLI.Main"
+    ```
+2. Follow the prompts to enter the configuration details:
+    ```
+    Enter total number of tickets: 
+    Enter maximum ticket capacity: 
+    Enter number of vendors: 
+    Enter tickets each vendor will release: 
+    Enter ticket release rate: 
+    Enter number of customers: 
+    Enter tickets each customer will purchase: 
+    ```
 
-- Implements `Runnable` interface.
-- Purchases tickets from the pool.
-- Constructor parameters:
-  - `TicketPool ticketPool`: The shared ticket pool.
-  - `int ticketsToPurchase`: Number of tickets to purchase.
 
-### Main
+## Configuration Files
 
-- Takes user input for the number of tickets, vendors, release rate, customers, and purchase rate.
-- Creates and starts vendor and customer threads.
-- Waits for all threads to complete using `thread.join()`.
+The program saves configuration details in three formats:
+- `info.json`: JSON format
+- `config.txt`: Plain text format
+- `config.ser`: Serialized format
 
-## How to Run
+## Code Structure
 
-1. **Clone the repository:**
-   ```sh
-   git clone <repository-url>
-   cd <repository-directory>
+- `Main.java`: The main entry point of the program. Handles user input and coordinates vendor and customer threads.
+- `Vendor.java`: Represents a vendor that releases tickets.
+- `Customer.java`: Represents a customer that purchases tickets.
+- `TicketPool.java`: Manages the ticket pool and synchronizes access to tickets.
+- `Config.java`: Handles configuration details and saves them in different formats.
