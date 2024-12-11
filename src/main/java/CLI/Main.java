@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
+        // Getting inputs
         int totalTickets = getValidInput(input, "Enter total number of tickets: ");
         int maximumTicketCapacity = getValidInput(input, "Enter maximum ticket capacity: ");
         int numberOfVendors = getValidInput(input, "Enter number of vendors: ");
@@ -16,13 +17,16 @@ public class Main {
         int numberOfCustomers = getValidInput(input, "Enter number of customers: ");
         int ticketsPerCustomer = getValidInput(input, "Enter tickets each customer will purchase: ");
 
+        // Check the ticket capacity condition
         if (maximumTicketCapacity <= totalTickets) {
             System.out.println("Maximum ticket capacity must be higher than total number of tickets.");
             return;
         }
 
+        // TicketPool object
         TicketPool ticketPool = new TicketPool(totalTickets, maximumTicketCapacity, numberOfVendors, numberOfCustomers);
 
+        // Calling all file saving methods in config.java
         Config config = new Config(totalTickets, releaseRate, ticketsPerCustomer, maximumTicketCapacity, numberOfVendors, numberOfCustomers, ticketsPerVendor, ticketsPerCustomer);
         config.saveConfigToJson("info.json");
         config.saveConfigToText("config.txt");
@@ -64,6 +68,7 @@ public class Main {
             }
         }
 
+        // Print the final output in the console
         System.out.println("All customers have finished purchasing tickets.");
         System.out.println("Total available tickets: " + ticketPool.getAvailableTickets());
         System.out.println("Tickets sold by each vendor:");

@@ -10,6 +10,7 @@ public class TicketPool {
     private final int[] vendorTicketsSold;
     private final int[] customerTicketsBought;
 
+    // Ticket pool constructor to get vales from the object
     public TicketPool(int initialTickets, int maximumTicketCapacity, int numberOfVendors, int numberOfCustomers) {
         this.availableTickets = initialTickets;
         this.maximumTicketCapacity = maximumTicketCapacity;
@@ -17,7 +18,10 @@ public class TicketPool {
         this.customerTicketsBought = new int[numberOfCustomers];
     }
 
+    // Adding tickets to the ticket pool array
     public void addTickets(int tickets, int vendorId) {
+        /* Use thread lock to use one thread at a time and check the maximum capacity exclude or not
+           Vendors can add tickets to the system*/
         lock.lock();
         try {
             int newTotal = availableTickets + tickets;
@@ -33,7 +37,9 @@ public class TicketPool {
         }
     }
 
+    // remove tickets from the ticket pool
     public boolean removeTicket(int customerId) {
+        /* Use thread lock to use one thread at a time and check weather each customer buy their own tickets */
         lock.lock();
         try {
             if (availableTickets > 0) {
